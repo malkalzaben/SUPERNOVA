@@ -22,22 +22,27 @@ def detect_service_and_version(banner, port=None):
         if match:
             version = match.group(1).strip()
 
-    elif "HTTP/" in banner_upper:
-        service = "HTTP" if port != 443 else "HTTPS"
-
+    eelif "HTTP/" in banner_upper or "SERVER:" in banner_upper:
+        service = "HTTP (Verified)" if port != 443 else "HTTPS (Verified)"
         match = re.search(r'Server:\s*(.+)', banner, re.IGNORECASE)
         if match:
             version = match.group(1).strip()
+        else:
+            version = "Web Server Detected"
 
-    elif "FTP" in banner_upper or banner.startswith("220 "):
-        service = "FTP"
+    elif "SMTP" in banner_upper or "ESMTP" in banner_upper:
+        service = "SMTP (Verified)"
         clean_banner = banner.replace("220 ", "").replace("-", " ").strip()
         version = clean_banner.split('\r')[0].split('\n')[0].strip()
 
-    else:
-        common_ports = {21: "FTP", 22: "SSH", 80: "HTTP", 443: "HTTPS", 3306: "MySQL"}
-        service = common_ports.get(port, "Unknown")
+    elif "FTP" in banner_upper or banner.startswith("220 "):
+        service = "FTP (Verified)"
+        clean_banner = banner.replace("220 ", "").replace("-", " ").strip()
+        version = clean_banner.split('\r')[0].split('\n')[0].strip()
+        
+    elif "SMB" in banner_upper or "SAMBA" in banner_upper:
+        service = "SMB (Verified)"
+        version = "SMB Service Detected"
 
-        version = banner.split('\n')[0].strip()[:50]
 
     return service, version
