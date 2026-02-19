@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sed -i 's/\r$//' main.py install.sh
 if [ "$EUID" -ne 0 ]; then
   echo "[!] Please run as root (use sudo ./install.sh)"
   exit
