@@ -10,21 +10,27 @@ sys.path.insert(0, current_dir)
 
 from core.scanner import run_scan
 
-def print_banner():
-    banner = """\033[96m
+
+def print_banner():    
+    CYAN = "\033[96m"
+    RED = "\033[91m"
+    WHITE = "\033[97m"
+    YELLOW = "\033[93m"
+    RESET = "\033[0m"
+
+    ascii_art = r"""
    _____ _    _ _____  ______ _____  _   _  ______      __      
   / ____| |  | |  __ \|  ____|  __ \| \ | |/ __ \ \    / /\     
  | (___ | |  | | |__) | |__  | |__) |  \| | |  | \ \  / /  \    
   \___ \| |  | |  ___/|  __| |  _  /| . ` | |  | |\ \/ / /\ \   
   ____) | |__| | |    | |____| | \ \| |\  | |__| | \  / ____ \  
  |_____/ \____/|_|    |______|_|  \_\_| \_|\____/   \/_/    \_\ 
-                                                                
-        
-                                                               \033[0m
-    \033[91m[+] \033[97mInternal Vulnerability Scanner Core
-    \033[91m[+] \033[93mDeveloped by:
-    \033[0m
-"""
+    """
+    
+    print(CYAN + ascii_art + RESET)
+    print(f"    {RED}[+] {WHITE}Internal Vulnerability Scanner Core")
+    print(f"    {RED}[+] {YELLOW}Developed by: ErrorCatchers Team\n{RESET}")
+
     print(banner)
 
 def get_ips_from_target(target_str):
@@ -96,3 +102,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
