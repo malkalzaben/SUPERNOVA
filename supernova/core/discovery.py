@@ -23,17 +23,3 @@ def is_host_up(ip_address, timeout_sec=2):
     except Exception as e:
         print(f"[!] Error checking host {ip_address}: {e}")
         return False
-
-
-#testing
-# ==========================================
-if __name__ == "__main__":
-    target_ip = "192.168.100.41"
-    scan_timeout = 2
-
-    print(f"[*] Checking if {target_ip} is UP...")
-
-    if is_host_up(target_ip, timeout_sec=scan_timeout):
-        print(f"[+] Host {target_ip} is UP!")
-    else:
-        print(f"[-] Host {target_ip} is DOWN.")
