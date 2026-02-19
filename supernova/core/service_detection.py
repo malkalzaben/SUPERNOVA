@@ -1,5 +1,5 @@
 import re
-def detect_service_and_version(banner, port=None):
+def detect_service_and_version(banner, port=None, target_ip=None):
 
     service = "Unknown"
     version = "Unknown"
@@ -22,7 +22,7 @@ def detect_service_and_version(banner, port=None):
         if match:
             version = match.group(1).strip()
 
-    eelif "HTTP/" in banner_upper or "SERVER:" in banner_upper:
+    elif "HTTP/" in banner_upper or "SERVER:" in banner_upper:
         service = "HTTP (Verified)" if port != 443 else "HTTPS (Verified)"
         match = re.search(r'Server:\s*(.+)', banner, re.IGNORECASE)
         if match:
@@ -39,7 +39,7 @@ def detect_service_and_version(banner, port=None):
         service = "FTP (Verified)"
         clean_banner = banner.replace("220 ", "").replace("-", " ").strip()
         version = clean_banner.split('\r')[0].split('\n')[0].strip()
-        
+
     elif "SMB" in banner_upper or "SAMBA" in banner_upper:
         service = "SMB (Verified)"
         version = "SMB Service Detected"
