@@ -2,7 +2,8 @@
 ```markdown
 #  SUPERNOVA - Internal Vulnerability Scanner
 
-SUPERNOVA is a lightweight, Python-based command-line internal vulnerability scanner designed for lab environments. It performs host discovery, smart port scanning, service enumeration with active probing, and security misconfiguration detection. 
+SUPERNOVA is a lightweight, Python-based command-line internal vulnerability scanner designed for lab environments. It performs host discovery,
+smart port scanning, service enumeration with active probing, and security misconfiguration detection. 
 
 Developed as a modular and extensible tool, it maps detected services to known CVEs and generates structured, machine-readable JSON reports.
 
