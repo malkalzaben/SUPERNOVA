@@ -29,9 +29,7 @@ def print_banner():
     
     print(CYAN + ascii_art + RESET)
     print(f"    {RED}[+] {WHITE}Internal Vulnerability Scanner Core")
-    print(f"    {RED}[+] {YELLOW}Developed by: ErrorCatchers Team\n{RESET}")
-
-    print(banner)
+    print(f"    {RED}[+] {YELLOW}Developed by:{RESET}")
 
 def get_ips_from_target(target_str):
     try:
@@ -105,6 +103,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
