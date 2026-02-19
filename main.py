@@ -80,7 +80,7 @@ def parse_arguments():
                         help="Target IP or Subnet CIDR (e.g., 192.168.1.1 or 192.168.1.0/24)")
     
     parser.add_argument("-p", "--ports", dest="ports", 
-                        help="Specific ports separated by commas. Default is common ports.")
+                        help="Ports to scan: 'top100', 'all', '1-1000', or '22,80' (Default: top 15)")
     
     parser.add_argument("-s", "--speed", dest="speed", type=float, default=1.0, 
                         help="Timeout in seconds per port (default: 1.0).")
@@ -126,6 +126,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
