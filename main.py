@@ -71,6 +71,12 @@ def parse_arguments():
 
 def main():
     print_banner()
+        if len(sys.argv) == 1:
+        print("\033[93m[!] Missing required arguments.\033[0m")
+        print("\033[97m[*] Tip: Type \033[96msupernova -h\033[0m \033[97mto see the help menu.\033[0m\n")
+        sys.exit(1)
+        
+     args = parse_arguments()
     
     args = parse_arguments()
     
@@ -102,4 +108,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
