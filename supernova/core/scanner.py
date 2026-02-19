@@ -11,7 +11,6 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
     scan_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     current_user = getpass.getuser()
 
-    # طباعة التوثيق مرة واحدة في البداية (Team name مطلوب في المشروع)
     print("=" * 65)
     print(f"[*] Team           : SUPERNOVA")
     print(f"[*] Scope (Target) : {scope_name} (Total Hosts: {len(target_ips)})")
@@ -19,19 +18,16 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
     print(f"[*] Scan run by    : {current_user}")
     print("=" * 65)
 
-    # الدوران على كل IP في الشبكة (أو الـ IP الوحيد إذا كان واحداً)
     for ip in target_ips:
         print(f"\n{'=' * 20} TARGET: {ip} {'=' * 20}")
 
-        # 1. Host Discovery
         print(f"[{ip}] Step 1: Checking if host is UP...")
         if not is_host_up(ip, timeout_sec=timeout_sec):
             print(f"[-] Host {ip} is DOWN. Skipping to next host...")
-            continue  # ننتقل للـ IP التالي في القائمة
+            continue  
 
         print(f"[+] Host {ip} is UP!")
 
-        # 2. Port Scanning
         print(f"[{ip}] Step 2: Scanning ports...")
         open_ports = scan_multiple_ports(ip, ports_to_scan, timeout_sec=timeout_sec)
 
@@ -41,7 +37,6 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
 
         print(f"[+] Found {len(open_ports)} open ports: {open_ports}")
 
-        # 3. Service Detection
         print(f"[{ip}] Step 3: Detecting Services and Versions...")
         print("-" * 55)
         print(f"{'PORT':<8} | {'SERVICE':<10} | {'VERSION'}")
@@ -53,5 +48,6 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
             print(f"{port:<8} | {service:<10} | {version}")
 
         print("-" * 55)
+
 
     print("\n[+] All tasks completed for the given scope!")
