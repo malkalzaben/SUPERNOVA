@@ -97,7 +97,7 @@ supernova -t 192.168.1.50 --ftp --smb
 
 ## The SUPERNOVA Team
 
-This project was designed and developed from scratch as a Bachelor of Cybersecurity academic project at the **University of Jordan**.
+This project was designed and developed from scratch as a graduation project for Green Circle PenTest Internship **.
 
 * **  ** .
 * **Malek Al Zaben** Core Engine, CLI Architecture, main.py, README.md.
