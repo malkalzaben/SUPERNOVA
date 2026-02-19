@@ -58,28 +58,28 @@ SUPERNOVA provides a user-friendly CLI with various flags to customize your scan
 **1. Basic Scan (Default Top 15 Ports):**
 
 ```bash
-./supernova -t 192.168.1.100
+supernova -t 192.168.1.100
 
 ```
 
 **2. Subnet Scan with Specific Ports:**
 
 ```bash
-./supernova -t 10.48.170.0/24 -p 22,80,111,2049
+supernova -t 10.48.170.0/24 -p 22,80,111,2049
 
 ```
 
 **3. Deep Scan (Top 100 Ports) with Faster Timeout:**
 
 ```bash
-./supernova -t 10.48.155.187 -p top100 -s 0.5
+supernova -t 10.48.155.187 -p top100 -s 0.5
 
 ```
 
 **4. Run Specific Security Checks Only:**
 
 ```bash
-./supernova -t 192.168.1.50 --ftp --smb
+supernova -t 192.168.1.50 --ftp --smb
 
 ```
 
@@ -94,10 +94,11 @@ SUPERNOVA provides a user-friendly CLI with various flags to customize your scan
 
 ---
 
-## The ErrorCatchers Team
+## The SUPERNOVA Team
 
 This project was designed and developed from scratch as a Bachelor of Cybersecurity academic project at the **University of Jordan**.
 
-* **Malek** Core Engine, CLI Architecture.
+* **  ** .
+* **Malek Al Zaben** Core Engine, CLI Architecture, main.py, README.md.
 * ** ** - Security Checks Vulnerability Assessment.
 * ** ** - CVE Correlation  Reporting Logic.
