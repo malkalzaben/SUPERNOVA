@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 import argparse
 import sys
+import os
 import ipaddress
-from core.scanner import run_scan
+import json 
 
+current_dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, current_dir)
+
+from core.scanner import run_scan
 
 def get_ips_from_target(target_str):
     try:
@@ -16,21 +21,23 @@ def get_ips_from_target(target_str):
     except ValueError:
         return None
 
-
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description="SUPERNOVA Internal Vulnerability Scanner - Core Engine",
         usage="supernova -t <TARGET_IP_OR_CIDR> [options]"
     )
-
-    parser.add_argument("-t", "--target", dest="target", required=True,
+    
+    parser.add_argument("-t", "--target", dest="target", required=True, 
                         help="Target IP or Subnet CIDR (e.g., 192.168.1.1 or 192.168.1.0/24)")
-
-    parser.add_argument("-p", "--ports", dest="ports",
-                        help="Specific ports separated by commas. Default is only common 15 ports.")
-
-    parser.add_argument("-s", "--speed", dest="speed", type=float, default=1.0,
+    
+    parser.add_argument("-p", "--ports", dest="ports", 
+                        help="Specific ports separated by commas. Default is only 15 common ports.")
+    
+    parser.add_argument("-s", "--speed", dest="speed", type=float, default=1.0, 
                         help="Timeout in seconds per port (default: 1.0).")
+
+    parser.add_argument("-o", "--output", dest="output", default="report.json", 
+                        help="Output JSON file name (default: report.json).")
 
     parser.add_argument("--all", action="store_true", help="Run all security checks ")
     parser.add_argument("--ftp", action="store_true", help="Run FTP checks only ")
@@ -39,15 +46,14 @@ def parse_arguments():
 
     return parser.parse_args()
 
-
 def main():
     args = parse_arguments()
-
+    
     target_ips = get_ips_from_target(args.target)
     if not target_ips:
         print(f"[!] Error: Invalid Target format '{args.target}'. Please use a valid IP or CIDR.")
         sys.exit(1)
-
+        
     if args.ports:
         try:
             target_ports = [int(p.strip()) for p in args.ports.split(',')]
@@ -58,15 +64,16 @@ def main():
         target_ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 3306, 3389, 8080]
 
     try:
-        run_scan(target_ips=target_ips, scope_name=args.target, ports_to_scan=target_ports, timeout_sec=args.speed)
+        scan_results = run_scan(target_ips=target_ips, scope_name=args.target, ports_to_scan=target_ports, timeout_sec=args.speed)
+        
+        with open(args.output, 'w') as json_file:
+            json.dump(scan_results, json_file, indent=4)
+            
+        print(f"\n[+] Scan report successfully saved to: {args.output}")
+
     except KeyboardInterrupt:
         print("\n[!] Scan interrupted by user. Exiting...")
         sys.exit(0)
 
-
 if __name__ == "__main__":
-
     main()
-
-
-
