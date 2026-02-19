@@ -12,7 +12,7 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
     
     scan_results = {
         "metadata": {
-            "team": "ErrorCatchers",
+            "team": "ٍSUPERNOVA",
             "scope": scope_name,
             "time": scan_time,
             "user": current_user
@@ -71,3 +71,4 @@ def run_scan(target_ips, scope_name, ports_to_scan, timeout_sec=1.0):
     print("\n[+] All tasks completed for the given scope!")
     
     return scan_results
+
