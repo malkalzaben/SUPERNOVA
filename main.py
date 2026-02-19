@@ -41,6 +41,34 @@ def get_ips_from_target(target_str):
             return [str(ip)]
     except ValueError:
         return None
+def parse_ports(port_arg):
+    top_15 = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 3306, 3389, 8080]
+    
+    top_100 = [7, 9, 13, 21, 22, 23, 25, 26, 37, 53, 79, 80, 81, 88, 106, 110, 111, 113, 119, 135, 139, 143, 144, 179, 199, 389, 427, 443, 444, 445, 465, 513, 514, 515, 543, 544, 548, 554, 587, 631, 646, 873, 990, 993, 995, 1025, 1026, 1027, 1028, 1029, 1110, 1433, 1720, 1723, 1755, 1900, 2000, 2001, 2049, 2121, 2717, 3000, 3128, 3306, 3389, 3986, 4899, 5000, 5009, 5051, 5060, 5190, 5357, 5432, 5631, 5666, 5800, 5900, 6000, 6001, 6646, 7070, 8000, 8008, 8009, 8080, 8081, 8443, 8888, 9100, 9999, 10000, 32768, 49152, 49153, 49154, 49155, 49156, 49157]
+
+    if not port_arg:
+        return top_15
+        
+    port_arg = port_arg.lower().strip()
+    
+    if port_arg == 'all' or port_arg == '-':
+        return list(range(1, 65536))
+    elif port_arg == 'top100':
+        return top_100
+    elif '-' in port_arg:
+        try:
+            start, end = port_arg.split('-')
+            return list(range(int(start), int(end) + 1))
+        except ValueError:
+            print("\033[91m[!] Error: Invalid port range format. Use start-end (e.g., 1-1000).\033[0m")
+            sys.exit(1)
+    else:
+        try:
+            return [int(p.strip()) for p in port_arg.split(',')]
+        except ValueError:
+            print("\033[91m[!] Error: Ports must be numbers separated by commas.\033[0m")
+            sys.exit(1)
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
@@ -80,14 +108,9 @@ def main():
         print(f"\033[91m[!] Error: Invalid Target format '{args.target}'. Please use a valid IP or CIDR.\033[0m")
         sys.exit(1)
         
-    if args.ports:
-        try:
-            target_ports = [int(p.strip()) for p in args.ports.split(',')]
-        except ValueError:
-            print(f"\033[91m[!] Error: Ports must be numbers separated by commas.\033[0m")
-            sys.exit(1)
-    else:
-        target_ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 3306, 3389, 8080]
+    target_ports = parse_ports(args.ports)
+    
+    print(f"\033[94m[*] Preparing to scan {len(target_ports)} ports...\033[0m")
 
     try:
         scan_results = run_scan(target_ips=target_ips, scope_name=args.target, ports_to_scan=target_ports, timeout_sec=args.speed)
@@ -103,6 +126,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
