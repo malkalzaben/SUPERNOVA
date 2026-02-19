@@ -11,7 +11,8 @@ Developed as a modular and extensible tool, it maps detected services to known C
 ##  Key Features
 * **Versatile Targeting:** Scan a single host (IP/Hostname) or an entire subnet (CIDR notation).
 * **Smart Port Parsing:** Supports flexible port selection (`-p top100`, `-p all`, `-p 22,80,443`, or ranges like `-p 1-1000`).
-* **Active Service Fingerprinting:** Utilizes "Double Tap" and protocol-specific probes (HTTP, FTP, SMTP) to wake up silent ports and verify services with a high Confidence Level (Verified vs. Maybe).
+* **Active Service Fingerprinting:** Utilizes "Double Tap" and protocol-specific probes (HTTP, FTP, SMTP) to wake up silent ports and
+    verify services with a high Confidence Level (Verified vs. Maybe).
 * **Security Checks:** Detects common misconfigurations (e.g., FTP Anonymous Access, SMB Guest Access, Cleartext HTTP).
 * **CVE Correlation:** Maps identified service versions to documented CVEs to assess risk.
 * **Structured Reporting:** Outputs a clear terminal summary and a detailed `report.json` file for further processing.
@@ -19,19 +20,15 @@ Developed as a modular and extensible tool, it maps detected services to known C
 ---
 
 ##  Dependencies & Requirements
-This tool is built primarily using Python's standard library to ensure a lightweight footprint. However, a few specific modules are required for advanced security checks.
-
-* Python 3.8+
-* `requests` (For HTTP checks and API interactions)
-* `pysmb` (For SMB vulnerability enumeration)
-
+This tool is built primarily using Python's standard library to ensure a lightweight footprint. However,
+a few specific modules are required for advanced security checks.
 ---
 
 ##  Installation
 
 1. Clone the repository or extract the project folder:
    ```bash
-   git clone [https://github.com/ErrorCatchers/SUPERNOVA.git](https://github.com/ErrorCatchers/SUPERNOVA.git)
+   git clone [https://github.com/ya7ya-geronimo/SUPERNOVA.git](https://github.com/ya7ya-geronimo/SUPERNOVA.git)
    cd SUPERNOVA
 
 ```
