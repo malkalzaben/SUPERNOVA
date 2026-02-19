@@ -2,7 +2,7 @@ import argparse
 import sys
 import ipaddress
 from core.scanner import run_scan
-
+#!/usr/bin/env python3
 
 def get_ips_from_target(target_str):
     """تحويل المدخل (سواء كان IP واحد أو Subnet) إلى قائمة من الـ IPs"""
@@ -73,4 +73,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
