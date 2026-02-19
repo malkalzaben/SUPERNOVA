@@ -74,10 +74,7 @@ def main():
     if len(sys.argv) == 1:
         print("\033[93m[!] Missing required arguments.\033[0m")
         print("\033[97m[*] Tip: Type \033[96msupernova -h\033[0m \033[97mto see the help menu.\033[0m\n")
-        sys.exit(1)
-        
-     args = parse_arguments()
-    
+        sys.exit(1)    
     args = parse_arguments()
     
     target_ips = get_ips_from_target(args.target)
@@ -108,6 +105,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
